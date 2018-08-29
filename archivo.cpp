@@ -1,23 +1,25 @@
 #include <iostream>
 #include "BlockStream.h"
-#include <string>
+#include "StringN.h"
+#include <fstream>
+
 
 int main(){
 	struct GrupoA{
-		std::string equipo;
-		char letragrupo;
-		std::string confederacion;
+		String<14> equipo;
+		String<1> letragrupo;
+		String<10> confederacion;
 		
 	};
 	
 	constexpr auto filename{"grupoA"};
 
-	std::ofstream out{filename, std::ios::binary};
+	std::ofstream out{filename, };
 
-	WriteBlock(out, GrupoA{"Uruguay", 'A', "CONMEBOL"});
-	WriteBlock(out, GrupoA{"Rusia", 'A', "AFC"});
-	WriteBlock(out, GrupoA{"Arabia Saudita", 'A', "AFC"});
-	WriteBlock(out, GrupoA{"Egipto", 'A', "CAF"});
+	WriteBlock(out, GrupoA{PackString("Uruguay - "), PackString("A"), PackString(" - CONMEBOL\n")});
+	//WriteBlock(out, GrupoA{PackString("Rusia - "), PackString("A"), PackString(" - AFC\n")});
+	//WriteBlock(out, GrupoA{PackString("Arabia Saudita - "), PackString("A"), PackString(" - AFC\n")});
+	//WriteBlock(out, GrupoA{PackString("Egipto - "), PackString("A"), PackString(" - CAF\n")});
 
 	out.close();
 	

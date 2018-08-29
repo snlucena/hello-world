@@ -1,34 +1,29 @@
 #include <iostream>
 #include "BlockStream.h"
-#include <string>
+#include "StringN.h"
 #include <fstream>
 
 
 int main () {
 
 struct GrupoA{ 
-	std::string equipo;
-	char letragrupo;
-	std::string confederacion;
+	String<20> equipo;
+	String<1> letragrupo;
+	String<10> confederacion;
 };
 
-//constexpr auto filename{"grupoA"};
 
-std::ifstream in{"grupoA", std::ios::binary};
+std::ifstream in{"grupoA", };
 
 GrupoA grupo;
 
 for(GrupoA grupo; ReadBlock(in, grupo);)
 
-	std::cout<< grupo.equipo;
-	std::cout<< grupo.letragrupo;
-	std::cout<< grupo.confederacion;
+	std::cout<< UnpackString(grupo.equipo) << UnpackString(grupo.letragrupo) << UnpackString(grupo.confederacion);
 
 in.close();
 
 
-//for(GrupoA grupo, ReadBlock(in, grupo); )
-	//	std::cout<< grupo; 
 
 
 }
